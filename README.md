@@ -1,0 +1,2 @@
+# Alan.RepositoryGenerateToolkit
+Repository模式的网站架构生成器
