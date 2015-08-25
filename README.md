@@ -1,2 +1,1 @@
-# Alan.RepositoryGenerateToolkit
-Repository模式的网站架构生成器
+## Alan.RepositoryGenerateToolkitRepository模式的网站架构生成器## IntroductionModel层的模板使用的是LIQN to SQL. 可以自己修改模板.#### Attention在 GenericRepository.temp 和 GenericIRepository.temp  里面有一个 IsValidByRuleEngine 方法, 这个方法使用了第三方dll(RuleEngine), 如果你不需要可以删除.
