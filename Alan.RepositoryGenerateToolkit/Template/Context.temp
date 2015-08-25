@@ -1,0 +1,50 @@
+﻿using System.Data.Linq;
+using System.Data.Linq.Mapping;
+using System.Data;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Linq;
+using System.Linq.Expressions;
+using System.ComponentModel;
+using System;
+
+namespace @Model.Config.Model.ContextNamespace
+{
+
+	public partial class @Model.Config.Model.ContextName : System.Data.Linq.DataContext
+	{
+		private static System.Data.Linq.Mapping.MappingSource mappingSource = new AttributeMappingSource();
+
+		public @(Model.Config.Model.ContextName)() : base(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["@Model.Config.Model.ConnectionName"].ConnectionString) { }
+
+			
+		public @(Model.Config.Model.ContextName)(string connection) : base(connection, mappingSource)
+		{
+		}
+		
+		public @(Model.Config.Model.ContextName)(System.Data.IDbConnection connection) : base(connection, mappingSource)
+		{
+		}
+		
+		public @(Model.Config.Model.ContextName)(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : base(connection, mappingSource)
+		{
+		}
+		
+		public @(Model.Config.Model.ContextName)(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : base(connection, mappingSource)
+		{
+		}
+		
+		
+
+
+		@foreach (var table in Model.Tables)
+		{
+		<text>
+			public System.Data.Linq.Table<@(Model.Config.Model.ModelNamespace).@table.TableName> @table.TableName 
+			{
+				get { return this.GetTable<@(Model.Config.Model.ModelNamespace).@table.TableName>(); }
+			}
+		</text>
+		}
+	}
+}

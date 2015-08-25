@@ -1,0 +1,164 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Data.Linq;
+using System.Linq.Dynamic;
+using System.Linq.Expressions;
+using @Model.Model.ModelNamespace;
+
+namespace @Model.Repository.IRepositoryNamespace
+{
+
+    public interface @Model.Repository.GenericIRepositoryName<T> where T : class
+    {
+        @(Model.Model.ContextNamespace).@Model.Model.ContextName Context { get; }
+
+        Table<T> GetTable();
+
+        IQueryable<T> AsQuerable();
+
+        /// <summary>
+        /// Find all records
+        /// </summary>
+        /// <returns>IQueryable</returns>
+        IQueryable<T> FindAll();
+
+
+        /// <summary>
+        /// Get single record by condition with sort.
+        /// </summary>
+        /// <typeparam name="TSort"></typeparam>
+        /// <param name="order"></param>
+        /// <param name="condition"></param>
+        /// <returns></returns>
+        T FindOne<TSort>(Expression<Func<T, TSort>> order, Expression<Func<T, bool>> condition);
+        T FindOne<TSort>(string order, string condition, object[] parameters);
+
+        /// <summary>
+        /// Get one record by condition
+        /// </summary>
+        /// <param name="condition">Filter condition</param>
+        /// <returns>T</returns>
+        T FindOne(Expression<Func<T, bool>> condition);
+
+        T FindOne(string condition, object[] parameters);
+
+        #region Dynamic Query
+        IQueryable<T> Query(string filter, object[] parameters = null);
+        IQueryable<T> Query(string filter, string order, object[] parameters = null);
+        IQueryable<T> Query(string filter, string order, int skip, int take, object[] parameters = null);
+        IQueryable<T> Query(string filter, Expression<Func<T, bool>> whereClause, string order, object[] parameters = null);
+        IQueryable<T> Query(string filter, Expression<Func<T, bool>> whereClause, string order, int skip, int take, object[] parameters = null);
+        #endregion
+
+        #region LINQ Query
+        IQueryable<T> Query(Expression<Func<T, bool>> filter);
+        IQueryable<T> Query<TKey>(Expression<Func<T, bool>> filter, Expression<Func<T, TKey>> order);
+        IQueryable<T> Query(Expression<Func<T, bool>> filter, string order);
+        IQueryable<T> Query<TKey>(Expression<Func<T, bool>> filter, Expression<Func<T, TKey>> order, int skip, int take);
+        IQueryable<T> Query(Expression<Func<T, bool>> filter, string order, int skip, int take);
+        IQueryable<T> QueryDescending<TKey>(Expression<Func<T, bool>> filter, Expression<Func<T, TKey>> order, int skip, int take);
+        IQueryable<T> QueryDescending<TKey>(Expression<Func<T, bool>> filter, Expression<Func<T, TKey>> order);
+        #endregion
+
+
+
+        /// <summary>
+        /// Records count
+        /// </summary>
+        /// <param name="filter">Filter</param>
+        /// <returns>IQueryable</returns>
+        long TotalRecords(Expression<Func<T, bool>> filter);
+        long TotalRecords(string filter, object[] parameters);
+        long TotalRecords(string filter, Expression<Func<T, bool>> wherClause, object[] parameters);
+
+        bool IsExist(Expression<Func<T, bool>> condition);
+
+        int? MaxId(Expression<Func<T, bool>> filter, Expression<Func<T, int?>> column);
+        int? MaxId(Expression<Func<T, int?>> column);
+
+
+
+        /// <summary>
+        /// Add record
+        /// </summary>
+        /// <param name="entity">Entity</param>
+        /// <returns>T</returns>
+        T Insert(T entity);
+
+        IEnumerable<T> InsertMulti(IEnumerable<T> entities);
+
+        /// <summary>
+        /// Delete record
+        /// </summary>
+        /// <param name="entity">Entity</param>
+        /// <returns>Deleted or not</returns>
+        bool Delete(T entity);
+
+        /// <summary>
+        /// Delete record by condition
+        /// </summary>
+        /// <param name="condition"></param>
+        /// <returns>Deleted or not</returns>
+        bool Delete(Expression<Func<T, bool>> condition);
+        bool Delete(string condition, object[] parameters);
+
+        /// <summary>
+        /// Delete records
+        /// </summary>
+        /// <param name="condition">Condition</param>
+        /// <returns>Deleted or not</returns>
+        bool DeleteMulti(Expression<Func<T, bool>> condition);
+        bool DeleteMulti(string condition, object[] parameters);
+        bool DeleteMulti(IEnumerable<T> entities);
+
+
+        #region 需要单独实现
+        /// <summary>
+        /// Update record and submit
+        /// </summary>
+        /// <param name="entity">Entity</param>
+        /// <returns>Updated or not</returns>
+        bool Update(T entity);
+
+        /// <summary>
+        /// reset value
+        /// </summary>
+        void Update(T from, T to);
+
+        /// <summary>
+        /// Update record and submit
+        /// </summary>
+        /// <param name="filter">query filter</param>
+        /// <param name="entity">entity</param>
+        /// <returns>updated</returns>
+        bool Update(Expression<Func<T, bool>> filter, T entity);
+
+        /// <summary>
+        /// 数据校验
+        /// </summary>
+        /// <param name="entity">Entity</param>
+        /// <returns></returns>
+        Tuple<bool, string> IsValid(T entity);
+
+        /// <summary>
+        /// 使用RuleEngine进行数据校验
+        /// </summary>
+        /// <param name="entity">被校验的实体</param>
+        /// <param name="callback">在这里面添加校验规则</param>
+        /// <returns></returns>
+        Tuple<bool, string> IsValidByRuleEngine(T entity, Action<RulesEngine.ForClass<T>> callback = null);
+
+        /// <summary>
+        /// 此条记录是否重复
+        /// </summary>
+        /// <param name="entity">Entity</param>
+        /// <returns></returns>
+        bool IsRepeat(T entity);
+        #endregion
+
+        void EnableTrack(bool enable);
+
+        void Save();
+    }
+}

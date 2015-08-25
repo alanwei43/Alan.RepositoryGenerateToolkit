@@ -1,0 +1,29 @@
+﻿using System.Data.Linq;
+using System.Data.Linq.Mapping;
+using System.Data;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Linq;
+using System.Linq.Expressions;
+using System.ComponentModel;
+using System;
+
+namespace @Model.Config.Model.ModelNamespace
+{
+	[System.Data.Linq.Mapping.TableAttribute(Name="dbo.@Model.Table.TableName")]
+	public partial class @Model.Table.TableName
+	{
+		@foreach (var column in @Model.Table.Columns)
+        {
+            <text>
+				private @column.DataType _@column.Name;
+				[Column(Storage="_@column.Name", IsPrimaryKey=@column.IsPrimaryKey.ToString().ToLower(), IsDbGenerated=@column.IsDbGenerated.ToString().ToLower())]
+				public @column.DataType @column.Name
+				{ 
+					get{ return this._@column.Name; }
+					set{this._@column.Name = value;}
+				}
+			</text>
+        }
+	}
+}

@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Data.Linq;
+using System.Linq.Dynamic;
+using System.Linq.Expressions;
+using @Model.Config.Model.ModelNamespace;
+
+namespace @Model.Config.Repository.IRepositoryNamespace
+{
+
+    public interface I@(Model.Table.TableName)Repository: @(Model.Config.Repository.GenericIRepositoryName)<@Model.Table.TableName>
+    {
+       
+    }
+}
+

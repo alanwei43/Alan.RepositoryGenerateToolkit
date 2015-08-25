@@ -1,0 +1,30 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Data.Linq;
+using System.Linq.Dynamic;
+using System.Linq.Expressions;
+using @Model.Config.Model.ModelNamespace;
+
+namespace @Model.Config.Repository.RepositoryNamespace
+{
+
+    public class @(Model.Table.TableName)Repository: @(Model.Config.Repository.GenericRepositoryName)<@Model.Table.TableName>, @(Model.Config.Repository.IRepositoryNamespace).I@(Model.Table.TableName)Repository
+    {
+        public @(Model.Table.TableName)Repository () : base() { }
+        public @(Model.Table.TableName)Repository (@(Model.Config.Model.ModelNamespace).@(Model.Config.Model.ContextName) context) : base(context) { }
+
+        public new void Update(@(Model.Table.TableName) from, @(Model.Table.TableName) to)
+        {
+        }
+
+        public new bool Update(@(Model.Table.TableName) entity)
+        {
+            return false;
+        }
+        public new bool IsRepeat(@(Model.Table.TableName) entity)
+        {
+            return false;
+        }
+    }
+}
