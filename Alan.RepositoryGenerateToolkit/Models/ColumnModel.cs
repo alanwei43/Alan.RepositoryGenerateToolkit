@@ -40,11 +40,14 @@ namespace Alan.RepositoryGenerateToolkit.Models
                 var dataBaseType = this.DbType;
                 if (this.Length != null)
                 {
-                    var length = this.Length.GetValueOrDefault() == -1 ? "max" : this.Length.ToString();
+                    var length = this.Length.GetValueOrDefault() == -1 ? "MAX" : this.Length.ToString();
                     dataBaseType = String.Format("{0}({1})", dataBaseType, length);
                 }
                 var nullable = this.IsNullable ? "" : "NOT NULL";
-                return String.Format("{0} {1}", dataBaseType, nullable);
+                var identity = this.IsDbGenerated ? "IDENTITY" : "";
+
+                var richType = String.Format("{0} {1} {2}", dataBaseType, nullable, identity).Trim();
+                return richType;
             }
             set { }
         }
