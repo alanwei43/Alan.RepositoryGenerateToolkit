@@ -33,7 +33,7 @@ namespace Alan.RepositoryGenerateToolkit.Core
                 t.SetIdentityColumnNames(cxt);
                 t.Columns = cxt.ExecuteQuery<ColumnModel>(
                     String.Format(
-                        "select COLUMN_NAME as Name, DATA_TYPE as DbType, cast(case when IS_NULLABLE = 'YES' then 1 else 0 end as bit) as IsNullable, CHARACTER_MAXIMUM_LENGTH as [Length] from INFORMATION_SCHEMA.COLUMNS where Table_Name='{0}'",
+                        "select COLUMN_NAME as Name, DATA_TYPE as DbType, cast(case when IS_NULLABLE = 'YES' then 1 else 0 end as bit) as IsNullable, CHARACTER_MAXIMUM_LENGTH as [Length] from INFORMATION_SCHEMA.COLUMNS where Table_Name='{0}'", 
                         t.TableName)).ToList();
 
                 t.Columns.ForEach(c =>

@@ -17,7 +17,7 @@ namespace @Model.Config.Model.ModelNamespace
         {
             <text>
 				private @column.DataType _@column.Name;
-				[Column(Storage="_@column.Name", DbType = "@column.RichDbType", IsPrimaryKey=@column.IsPrimaryKey.ToString().ToLower(), IsDbGenerated=@column.IsDbGenerated.ToString().ToLower())]
+				[Column(Storage="_@column.Name", AutoSync = @column.AutoSync, DbType = "@column.RichDbType", IsPrimaryKey=@column.IsPrimaryKey.ToString().ToLower(), IsDbGenerated=@column.IsDbGenerated.ToString().ToLower())]
 				public @column.DataType @column.Name
 				{ 
 					get{ return this._@column.Name; }

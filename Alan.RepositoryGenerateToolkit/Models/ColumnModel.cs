@@ -33,6 +33,12 @@ namespace Alan.RepositoryGenerateToolkit.Models
         public bool IsDbGenerated { get; set; }
         public int? Length { get; set; }
 
+        public string AutoSync
+        {
+            get { return this.IsDbGenerated ? "AutoSync.OnInsert" : "AutoSync.Never"; }
+            set { }
+        }
+
         public string RichDbType
         {
             get
