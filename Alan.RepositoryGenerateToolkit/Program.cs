@@ -20,7 +20,7 @@ namespace Alan.RepositoryGenerateToolkit
         static void Main(string[] args)
         {
             ModelGenerate.SaveModels();
-            //RepositoryGenerate.SaveRepositories();
+            RepositoryGenerate.SaveRepositories();
         }
     }
 }
