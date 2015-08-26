@@ -1,5 +1,5 @@
 ﻿{
-    "ConnectionString": "server=106.39.123.229; uid=sa; pwd=huao@888; database=CrowdFundingCmsDev",
+    "ConnectionString": "your connection",
     "Repository": {
         "IRepositoryNamespace": "Ysd.BusinessLogicLayer.IRepository",
         "IRepositorySavePath": "E:\\Temporary\\back\\IRepository",
