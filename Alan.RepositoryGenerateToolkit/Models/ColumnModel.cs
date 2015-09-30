@@ -61,46 +61,66 @@ namespace Alan.RepositoryGenerateToolkit.Models
 
         private string ConvertType()
         {
-
+            //Reference: https://msdn.microsoft.com/en-us/library/vstudio/bb386947(v=vs.100).aspx
             var dbType = this.DbType.ToLower();
-            var clrType = "string";
+            
+            string clrType;
             switch (dbType)
             {
                 case "varchar":
                 case "nvarchar":
                 case "ntext":
+                case "text":
                     clrType = "string";
                     break;
                 case "smalldatetime":
                 case "datetime":
+                case "datetime2":
+                case "date":
+                case "time":
                     clrType = this.IsNullable ? "DateTime?" : "DateTime";
                     break;
-                case "smallint":
-                case "tinyint":
-                    clrType = this.IsNullable ? "short?" : "short";
+                case "datetimeoffset":
+                    clrType = this.IsNullable ? "DateTimeOffset?" : "DateTimeOffset";
                     break;
-                case "uniqueidentifier":
-                    clrType = this.IsNullable ? "Guid?" : "Guid";
-                    break;
+
                 case "bit":
                     clrType = this.IsNullable ? "bool?" : "bool";
                     break;
+                case "tinyint":
+                    clrType = this.IsNullable ? "byte?" : "byte";
+                    break;
+                case "smallint":
+                    clrType = this.IsNullable ? "short?" : "short";
+                    break;
+                case "int":
+                    clrType = this.IsNullable ? "int?" : "int";
+                    break;
+                case "bigint":
+                    clrType = this.IsNullable ? "long?" : "long";
+                    break;
+
+                case "uniqueidentifier":
+                    clrType = this.IsNullable ? "Guid?" : "Guid";
+                    break;
+
                 case "decimal":
+                case "smallmoney":
                 case "money":
                     clrType = this.IsNullable ? "decimal?" : "decimal";
                     break;
-                case "float":
+
                 case "double":
+                    clrType = this.IsNullable ? "double?" : "double";
+                    break;
+                case "float":
                     clrType = this.IsNullable ? "float?" : "float";
                     break;
-                case "text":
-                    clrType = "string";
-                    break;
-                case "int":
-                case "bigint":
-                    clrType = this.IsNullable ? "int?" : "int";
-                    break;
+                default:
+                    throw new Exception("找不到匹配的数据类型.");
             }
+
+
             return clrType;
         }
     }

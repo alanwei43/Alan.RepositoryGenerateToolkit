@@ -1,0 +1,26 @@
+﻿{
+    "ConnectionString": "server=106.39.123.229; uid=sa; pwd=huao@888; database=YSD_BPM_DATABASE",
+    "Repository": {
+        "IRepositoryNamespace": "Ysd.BusinessLogicLayer.IRepository",
+        "IRepositorySavePath": "E:\\Temporary\\back\\IRepository",
+        "RepositoryNamespace": "Ysd.BusinessLogicLayer.Repository",
+        "RepositorySavePath": "E:\\Temporary\\back\\Repository",
+        "GenericIRepositoryTemplatePath": "E:\\Projects\\Alan.RepositoryGenerateToolkit\\Alan.RepositoryGenerateToolkit\\Template\\GenericIRepository.temp",
+        "GenericRepositoryTemplatePath": "E:\\Projects\\Alan.RepositoryGenerateToolkit\\Alan.RepositoryGenerateToolkit\\Template\\GenericRepository.temp",
+        "IRepositoryTemplatePath": "E:\\Projects\\Alan.RepositoryGenerateToolkit\\Alan.RepositoryGenerateToolkit\\Template\\IRepository.temp",
+        "RepositoryTemplatePath": "E:\\Projects\\Alan.RepositoryGenerateToolkit\\Alan.RepositoryGenerateToolkit\\Template\\Repository.temp",
+        "GenericIRepositoryName": "IGenericRepository",
+        "GenericRepositoryName": "GenericRepository"
+    },
+    "Model": {
+        "ModelTemplatePath": "E:\\Projects\\Alan.RepositoryGenerateToolkit\\Alan.RepositoryGenerateToolkit\\Template\\Model.temp",
+        "ModelSavePath": "E:\\Temporary\\back\\Model",
+        "ModelNamespace": "Ysd.DataAccessLayer.Models",
+
+        "ContextTemplatePath": "E:\\Projects\\Alan.RepositoryGenerateToolkit\\Alan.RepositoryGenerateToolkit\\Template\\Context.temp",
+        "ContextSavePath": "E:\\Temporary\\back",
+        "ContextNamespace": "Ysd.DataAccessLayer.Models",
+        "ContextName": "ModelContext",
+        "ConnectionName": "Connection"
+    }
+}
