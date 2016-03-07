@@ -110,7 +110,7 @@ namespace @Model.Repository.IRepositoryNamespace
         /// <returns>Deleted or not</returns>
         bool DeleteMulti(Expression<Func<T, bool>> condition);
         bool DeleteMulti(string condition, object[] parameters);
-        bool DeleteMulti(IEnumerable<T> entities);
+        bool DeleteMulti(IQueryable<T> entities);
 
 
         #region 需要单独实现

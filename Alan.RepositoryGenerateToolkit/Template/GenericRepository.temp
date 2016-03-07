@@ -78,6 +78,7 @@ namespace @Model.Repository.RepositoryNamespace
         #region Delete
         public bool Delete(T entity)
         {
+            if (entity == null) return false;
             this.GetTable().DeleteOnSubmit(entity);
             return true;
         }
@@ -86,20 +87,21 @@ namespace @Model.Repository.RepositoryNamespace
         {
             var entity = this.FindOne(condition);
             if (entity == null) return false;
-            this.GetTable().DeleteOnSubmit(entity);
-            return true;
+            return this.Delete(entity);
         }
 
         public bool DeleteMulti(Expression<Func<T, bool>> condition)
         {
             var entities = this.Query(condition);
-            this.GetTable().DeleteAllOnSubmit(entities);
-            return true;
+            return this.DeleteMulti(entities);
         }
 
-        public bool DeleteMulti(IEnumerable<T> entities)
+        public bool DeleteMulti(IQueryable<T> entities)
         {
-            this.GetTable().DeleteAllOnSubmit(entities);
+            foreach (var entity in entities)
+            {
+                this.Delete(entity);
+            }
             return true;
         }
 
@@ -107,18 +109,16 @@ namespace @Model.Repository.RepositoryNamespace
         {
             var entity = this.FindOne(condition, parameters);
             if (entity == null) return false;
-            this.GetTable().DeleteOnSubmit(entity);
-            return true;
+            return this.Delete(entity);
         }
 
         public bool DeleteMulti(string condition, object[] parameters)
         {
-
             var entities = this.Query(condition, parameters);
-            this.GetTable().DeleteAllOnSubmit(entities);
-            return true;
+            return this.DeleteMulti(entities);
         }
         #endregion
+
 
         public T Insert(T entity)
         {
